@@ -1,0 +1,98 @@
+[gd_scene format=3 uid="uid://bq7q2kwkx0ypf"]
+
+[ext_resource type="Script" uid="uid://ck0ovrbdobly" path="res://script/world.gd" id="1_txmk2"]
+[ext_resource type="Material" uid="uid://cjak5ti1bdt7v" path="res://asset/texture/base.tres" id="2_m5mgf"]
+[ext_resource type="Script" uid="uid://bj2tvylwql1s7" path="res://script/in_game_ui.gd" id="2_w4qq1"]
+[ext_resource type="PackedScene" uid="uid://c3nc8vqj3tamg" path="res://scene/player.tscn" id="3_w4qq1"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_w4qq1"]
+sky_top_color = Color(0.5448363, 0.61647886, 0.7121759, 1)
+sky_horizon_color = Color(1.4086201, 1.4408937, 1.4909952, 1)
+ground_bottom_color = Color(0.6662092, 0.7236604, 0.8283697, 1)
+ground_horizon_color = Color(1.4086201, 1.4408937, 1.4909952, 1)
+
+[sub_resource type="Sky" id="Sky_m5mgf"]
+sky_material = SubResource("ProceduralSkyMaterial_w4qq1")
+
+[sub_resource type="Environment" id="Environment_emkrx"]
+background_mode = 2
+sky = SubResource("Sky_m5mgf")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_mmmqq"]
+size = Vector2(100, 100)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mmmqq"]
+size = Vector3(100, 0.3, 100)
+
+[sub_resource type="BoxMesh" id="BoxMesh_mmmqq"]
+size = Vector3(4, 1, 1)
+
+[node name="world" type="Node3D" unique_id=543275890 node_paths=PackedStringArray("player")]
+script = ExtResource("1_txmk2")
+player = NodePath("Player")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1804933251]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1435303340]
+environment = SubResource("Environment_emkrx")
+
+[node name="Ground" type="StaticBody3D" parent="." unique_id=339813591]
+
+[node name="GroundMesh" type="MeshInstance3D" parent="Ground" unique_id=2112296602]
+mesh = SubResource("PlaneMesh_mmmqq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground" unique_id=1467119242]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
+shape = SubResource("BoxShape3D_mmmqq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1013626600]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46842074, 0)
+material_override = ExtResource("2_m5mgf")
+mesh = SubResource("BoxMesh_mmmqq")
+
+[node name="Control" type="Control" parent="." unique_id=150552105]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_w4qq1")
+
+[node name="test_menu" type="Control" parent="Control" unique_id=1963923731]
+custom_minimum_size = Vector2(500, 400)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control/test_menu" unique_id=1375827077]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Player" parent="." unique_id=607175020 instance=ExtResource("3_w4qq1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.079642296, 1.2339213, 1.7532492)
+
+[node name="room" type="CSGBox3D" parent="." unique_id=168627907]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.6987083, 0)
+use_collision = true
+size = Vector3(21, 6, 21)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="room" unique_id=867573932]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2559204, 0)
+operation = 2
+size = Vector3(20, 5.511841, 20)
