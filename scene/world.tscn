@@ -27,8 +27,9 @@ size = Vector3(100, 0.3, 100)
 [sub_resource type="BoxMesh" id="BoxMesh_mmmqq"]
 size = Vector3(4, 1, 1)
 
-[node name="world" type="Node3D" unique_id=543275890 node_paths=PackedStringArray("player")]
+[node name="world" type="Node3D" unique_id=543275890 node_paths=PackedStringArray("menu", "player")]
 script = ExtResource("1_txmk2")
+menu = NodePath("test_menu")
 player = NodePath("Player")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1804933251]
@@ -52,37 +53,41 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46842074, 0)
 material_override = ExtResource("2_m5mgf")
 mesh = SubResource("BoxMesh_mmmqq")
 
-[node name="Control" type="Control" parent="." unique_id=150552105]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("2_w4qq1")
-
-[node name="test_menu" type="Control" parent="Control" unique_id=1963923731]
+[node name="test_menu" type="Control" parent="." unique_id=1963923731]
 custom_minimum_size = Vector2(500, 400)
-layout_mode = 1
+layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+offset_left = -250.0
+offset_top = -200.0
+offset_right = 250.0
+offset_bottom = 200.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("2_w4qq1")
 
-[node name="ColorRect" type="ColorRect" parent="Control/test_menu" unique_id=1375827077]
+[node name="ColorRect" type="ColorRect" parent="test_menu" unique_id=1375827077]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="test_menu" unique_id=1470839006]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="test_menu/VBoxContainer" unique_id=443720193]
+layout_mode = 2
+text = "text here"
 
 [node name="Player" parent="." unique_id=607175020 instance=ExtResource("3_w4qq1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.079642296, 1.2339213, 1.7532492)

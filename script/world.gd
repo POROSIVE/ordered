@@ -10,9 +10,9 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed(tabbed):
 		if menu.visible:
-			open_ui()
-		else:
 			close_ui()
+		else:
+			open_ui()
 
 func open_ui():
 	menu.show()
